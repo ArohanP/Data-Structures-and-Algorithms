@@ -3,7 +3,37 @@ def fun1(n):
     fun1(n-1) 
     print(n)
     fun1(n-1)
+Let's work out this function for n=3. fun1(3) will give - 
+fun1(2) 
+print(3)
 fun1(2)
+fun1(2) will give 
+
+fun1(1)
+print(2)
+fun1(1)
+
+fun1(1) will give 
+fun1(0) - terminate
+print(1) 
+fun1(0) - terminate
+
+implies fun1(1) will print(1)
+
+implies fun1(2) will be 
+1
+2
+1
+
+implies the output of the function will be 
+
+1
+2
+1
+3
+1
+2
+1
 
 def fun2(n):
     if n==1:return 0
@@ -119,7 +149,8 @@ def tower_of_hanoi(n, from_rod, to_rod, aux_rod):
 # Example usage
 tower_of_hanoi(3, 'A', 'C', 'B')
 
-def josephson(n,k):
+### Josephus problem without using recursion
+def josephus(n,k):
     arr=list(range(1,n+1))
     pointer=0
     while(len(arr)>1):
@@ -127,10 +158,11 @@ def josephson(n,k):
         del(arr[pointer])
         pointer=pointer%len(arr)
     return arr[pointer]
-josephson(29,3)
+josephus(29,3)
 
 ## How to convert this into a recursive solution
-
+# In the below function I try to convert the above written code to a recursive function.. Well, it is not the best solution...So, instead of using while loop as in the above code, 
+#I use a function call for iteration and the stopping condition is provided by the function condition.
 def joseph(arr,pointer,k):
     if len(arr)==1:
         print(arr[0])
@@ -182,6 +214,10 @@ def digital_root(num):
 
 digital_root(45)
 
+## Lucky numbers without a using recursion. Here, I am first creating an array arr of the numbers till n. Then, recursively I would delete the numbers as is the procedure to 
+#find lucky numbers. The stopping criteria of the loop is till len(arr)>=i, because once len(arr)<n, we know that n is a lucky number and should just return 1. Inside the while
+#loop the variable c exists to update the position of the array as the length of array is getting shorter in each iteration.
+
 def lucky_numbers(n):
     arr=list(range(1,n+1))
     i=2
@@ -197,7 +233,10 @@ def lucky_numbers(n):
     return 0
 lucky_numbers(135)
 
-print(6 - int(6/5))
+
+## This function uses recursion to tell whether a number is a lucky number or not. The logic is simple, in each iteration, the number n is shifted by n//count places.
+#And then, the number will be eleiminated if at any step the last number in the series that is n is perfectly divisible by count. If count becomes more than the number n,
+#we know that the number cannot be eliminated and the number n is a lucky number.
 
 def is_lucky_recursion(n, count):
     if count > n:
@@ -208,6 +247,11 @@ def is_lucky_recursion(n, count):
     n = n - n // count
     return is_lucky_recursion(n, count + 1)
 is_lucky_recursion(5,2)
+#Let's work out an example with is_lucky_recursion(5,2) to get a better idea. We start the fucntion with count=2 because our process starts eliminating numbers from 2.
+# I am writing is_lucky_recusion as fun from now on 
+# 1 2 3 4 5 - initial.... 
+# fun(5,2) - 1 2 3 4 5 becomes 1 3 5 so n=5 becomes n-n//2 i.e. 3
+# fun(3,3) - 1 3 5 - five is eliminated because 5 is now 3 and 3%3==0 statisfies the if condition. so the function returns false because 5 is elimiated and its not a lucky number.
 
 ## Print all the possible words from phone digits ----
 
